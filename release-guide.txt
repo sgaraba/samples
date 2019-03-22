@@ -1,0 +1,11 @@
+mvn clean install -DskipTests=true -Pdeploy
+
+mvn -Darguments="-Dmaven.test.skip=true" release:prepare release:perform -Prelease -Pdeploy
+
+mvn release:clean
+
+mvn release:branch -DbranchName=v0.2.2 -DupdateBranchVersions=true -DupdateWorkingCopyVersions=false -DautoVersionSubmodules=true
+
+git checkout -b scan-tool-0.2.2 scan-tool-0.2.1
+
+mvn versions:set -DnewVersion=0.2.2-SNAPSHOT
