@@ -10,4 +10,6 @@ git checkout -b scan-tool-0.2.2 scan-tool-0.2.1
 
 mvn versions:set -DnewVersion=0.2.2-SNAPSHOT
 
-ggsxsxsx
+#Second commit
+
+#Third commit
