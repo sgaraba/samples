@@ -1,0 +1,11 @@
+#
+keytool -storepasswd -new 123456 -keystore keystore.p12 -storepass 816 -storetype PKCS12 -v
+
+#
+keytool -changealias -alias "ruicvf.ctice.pki.gov.md " -destalias "ruicvf.ctice.pki.gov.md" -keystore keystore.p12 -storepass 123456
+
+#
+keytool.exe -import -file .\msign.cer -alias "msign" -keystore .\keystore.p12 -storepass 123456
+
+#
+openssl pkcs12 -export -in sips-dev.cnas.gov.md.crt -inkey sips-dev.cnas.gov.md.key -out sips.pfx -name "sips-dev.cnas.gov.md"

@@ -1,0 +1,61 @@
+
+### Compile single module
+javac -d output/com.apress.moduleA com.apress.moduleA/module-info.java com.apress.moduleA/com/apress/moduleA/Main.java
+
+
+### Run application containing single module
+java --module-path output --module com.apress.moduleA/com.apress.moduleA.Main
+java --module-path output -m com.apress.moduleA/com.apress.moduleA.Main
+
+### Compile multiple module
+javac -d output --module-source-path . com.apress.moduleA/module-info.java com.apress.moduleA/com/apress/moduleA/Main.java
+
+javac -d output --module-source-path . $(find . -name "*.java")
+
+javac -d output --module-source-path . --module com.apress.moduleA
+
+### Create jar module (packaging module)
+jar --create --file lib/moduleA.jar --main-class output/com.apress.moduleA.Main –c modules
+
+=====================================================================================================================================
+
+### Compile single module
+javac -d out/client.module src/client.module/module-info.java src/client.module/com/esempla/client/Main.java
+
+### Run application containing single module
+java --module-path out --module client.module/com.esempla.client.Main
+java -p out -m client.module/com.esempla.client.Main
+
+### Packaging
+jar -cfe mods/client.module.jar com.esempla.client.Main -C out/client.module .
+
+### Run module
+java --module-path mods --module client.module
+java -p mods -m client.module
+java --show-module-resolution --limit-modules java.base -p mods -m client.module
+
+### Linking modules
+jlink --module-path mods/;$JAVA_HOME/jmods --add-modules client.module --output client-image
+
+### Run 
+cd client-image\bin
+java --module client.module/com.esempla.client.Main
+
+
+jlink --module-path mods/;$JAVA_HOME/jmods --add-modules client.module --launcher client=client.module --output client-image
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

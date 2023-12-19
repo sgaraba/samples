@@ -1,15 +1,39 @@
 mvn clean install -DskipTests=true -Pdeploy
 
-mvn -Darguments="-Dmaven.test.skip=true" release:prepare release:perform -Prelease -Pdeploy
+=== release ====
+
+mvn release:branch -DbranchName=v0.11
+
+git checkout v0.11
+
+mvn -Darguments="-Dmaven.test.skip=true" release:prepare -Pdeploy
+
+mvn -Darguments="-Dmaven.test.skip=true" release:perform
 
 mvn release:clean
 
-mvn release:branch -DbranchName=v0.2.2 -DupdateBranchVersions=true -DupdateWorkingCopyVersions=false -DautoVersionSubmodules=true
+mvn release:prepare
+
+mvn release:perform
+
+git push
+
+mvn versions:set -DnewVersion=0.10-SNAPSHOT
+
+
+=== release libero ====
+
+mvn -Darguments="-Dmaven.test.skip=true" release:prepare
+
+=================
+
+mvn release:branch -DbranchName=v0.4-DupdateBranchVersions=true -DupdateWorkingCopyVersions=false -DautoVersionSubmodules=true
 
 git checkout -b scan-tool-0.2.2 scan-tool-0.2.1
 
-mvn versions:set -DnewVersion=0.2.2-SNAPSHOT
 
 #Second commit
 
 #Third commit
+
+git remote set-url origin https://git.esempla.com/govtech/liberopay/backend.git

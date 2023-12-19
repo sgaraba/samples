@@ -1,0 +1,28 @@
+docker rmi $(docker images --filter "dangling=true" -q --no-trunc) --force
+
+docker run -d --hostname my-rabbit --name some-rabbit -p 15672:15672 rabbitmq:3-management
+
+docker run  --hostname my-rabbit --name some-rabbit -p 15672:15672 -p 5672:5672 -p 5671:5671 rabbitmq:3-management
+
+docker run --name mongo -d -p 27017:27017 -v ~/mongo/db:/data/db mongo:3.2
+
+docker run --restart=always --env MINIO_ACCESS_KEY=access_key --env MINIO_SECRET_KEY=secret_key -p 9000:9000 -d --name minio minio/minio server /data
+
+docker run --restart=always --env MINIO_ROOT_USER=access_key --env MINIO_ROOT_PASSWORD=secret_key -p 9002:9000 -p 9001:9001 -d --name minio minio/minio server /data --console-address ":9001"
+
+docker run --name my-mc --hostname my-mc -it --entrypoint /bin/bash --rm minio/mc
+
+docker run -d --name ftp -p 3333:21 -p 30000-30009:30000-30009 -e "PUBLICHOST=localhost" -e FTP_USER_NAME=moldovagaz -e FTP_USER_PASS=123qweASD -e FTP_USER_HOME=~/volumes/moldovagaz/ftp stilliard/pure-ftpd
+
+docker run -p 25:25 --name=postfix -e MTP_HOST=localhost eeacms/postfix
+
+docker run -d --name ftp -p 21:21 -p 30000-30009:30000-30009 -e "PUBLICHOST=localhost" -e FTP_USER_NAME=moldovagaz -e FTP_USER_PASS=123qweASD -e FTP_USER_HOME=~/volumes/moldovagaz/ftp stilliard/pure-ftpd
+
+http://192.168.0.53/CertEnroll/local-WIN-E2829IN122R-CA.crl
+http://192.168.0.53/test.crl
+
+           <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>8.5.1</version>
+            </dependency>

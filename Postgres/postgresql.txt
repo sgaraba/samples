@@ -1,0 +1,14 @@
+SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = 'dbau' AND pid <> pg_backend_pid();
+
+pg_restore.exe -v -U postgres --dbname=dbau "D:\Documents\ISS PMS\DB\dbau_test.sql"
+
+#Conectare la BD
+psql "user=postgres host=localhost port=5432 dbname=cnas4 password=postgres"
+psql postgresql://postgres:postgres@localhost:5432/cnas4
+
+#Info despre BD
+SELECT current_database();
+SELECT current_user;
+SELECT inet_server_addr(), inet_server_port();
+SELECT version();
+\conninfo

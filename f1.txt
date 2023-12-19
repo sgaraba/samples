@@ -1,3 +1,0 @@
-f1.txt
-
-f1 vasya

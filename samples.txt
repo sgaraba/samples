@@ -1,0 +1,27 @@
+
+keytool.exe -importcert -keystore "C:\Program Files\Java\jdk1.8.0_211\jre\lib\security\cacerts" -alias liberopay.md -file C:\Users\user\Work\liberopay\admin\liperoapay.md.cer -storepass changeit
+
+
+docker run --name postgres1 -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d postgres
+
+docker run -d --name rabbitmq -p 15672:15672 -p 5672:5672 rabbitmq:3-management
+
+docker run -d \
+-e SPRING_DATASOURCE_URL=jdbc:postgresql://db_ip/db_name \
+-e SPRING_DATASOURCE_USERNAME=postgres \
+-e SPRING_DATASOURCE_PASSWORD=postgres \
+-e SPRING_DATASOURCE_PASSWORD=postgres \
+-e SPRING_PROFILES_ACTIVE=docker \
+-e SPRING_CLOUD_STREAM_BINDINGS_INPUT_DESTINATION=confirmation.docker \
+-e SPRING_CLOUD_STREAM_BINDINGS_OUTPUT_DESTINATION=confirmation.docker \
+-p 8080:8080 \
+--name liberopay-admin git.bts.md:8888/libero/admin:latest
+
+docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
+
+docker images -a | grep "registry.esempla.com" | awk '{print $3}' | xargs docker rmi
+
+
+#nfs
+sudo apt-get install nfs-common
+docker run -d --name nfs --privileged -v ~/nfsshare:/nfsshare -e SHARED_DIRECTORY=/nfsshare -p 2049:2049 itsthenetwork/nfs-server-alpine:latest
